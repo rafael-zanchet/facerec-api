@@ -10,12 +10,10 @@ const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
 const db = knex({
-    client: 'mysql2',
+    client: 'pg',
     connection: {
-      host : '127.0.0.1',
-      user : 'root',
-      password : 'root',
-      database : 'facerec'
+      host : process.env.DATABASE_URL,
+      ssl: true
     }
 });
 
