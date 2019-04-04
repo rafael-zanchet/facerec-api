@@ -8,13 +8,12 @@ const handleRegister = (req, res, db, bcrypt) => {
       joined: new Date()
   })*/
 const {name, email, password} = req.body;
-console.log(name, email, password);
 if (!name || !email || !password ){
   res.status(400).json('Unable to register 1'); 
 }else{
   const pass = bcrypt.hashSync(password);
   db.transaction(trx => {
-    console.log('reg 1');
+    console.log('reg 1-');
     trx.insert({
       hash: pass,
       email: email
