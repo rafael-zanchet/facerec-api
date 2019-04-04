@@ -14,6 +14,7 @@ if (!name || !email || !password ){
 }else{
   const pass = bcrypt.hashSync(password);
   db.transaction(trx => {
+    console.log('reg 1');
     trx.insert({
       hash: pass,
       email: email
@@ -22,6 +23,7 @@ if (!name || !email || !password ){
     .then(newId => {
       return trx.select('email').from('login').where('id', '=', newId)
         .then(loginEmail => {
+          console.log('reg 2');
           return trx('users')
           .insert({
             name: name, 
@@ -31,6 +33,7 @@ if (!name || !email || !password ){
           .then(newUser => {
             return trx.select('*').from('users').where('email', 'like', loginEmail[0].email)
               .then(user => {
+                console.log('reg 3');
                 res.status(200).json(user[0]);
               })              
           })
