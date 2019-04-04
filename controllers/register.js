@@ -20,6 +20,7 @@ if (!name || !email || !password ){
       email: email
     })
     .into('login')
+    .returning('id')
     .then(newId => {
       return trx.select('email').from('login').where('id', '=', newId)
         .then(loginEmail => {
