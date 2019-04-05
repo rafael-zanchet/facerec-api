@@ -14,11 +14,11 @@ if (!name || !email || !password ){
   const pass = bcrypt.hashSync(password);
   db.transaction(trx => {
     console.log('reg 1-');
-    trx.insert('login')({
+    trx.insert({
       hash: pass,
       email: email
     })
-    .returning('id')
+    .into('login')
     .then(newId => {
       return trx.select('email').from('login').where('id', '=', newId)
         .then(loginEmail => {
@@ -42,7 +42,7 @@ if (!name || !email || !password ){
     .then(trx.commit)
     .catch(trx.rollback)          
   })
-  .catch(err => res.status(400).json(err))
+  .catch(err => res.status(400).json('Unable to register 2'))
     //res.json(database.users[database.users.length -1]);
 }
 }
