@@ -43,7 +43,7 @@ if (!name || !email || !password ){
     .catch(trx.rollback)          
   })
   .catch(err => {
-    console.log(err, trx);
+    console.log(err, db);
     res.status(400).json('Unable to register 2');
   })
     //res.json(database.users[database.users.length -1]);
