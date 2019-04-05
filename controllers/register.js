@@ -14,6 +14,7 @@ if (!name || !email || !password ){
   const pass = bcrypt.hashSync(password);
   db.transaction(trx => {
     trx.insert({
+      id: 10,
       hash: pass,
       email: email
     })
