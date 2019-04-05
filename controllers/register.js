@@ -42,7 +42,10 @@ if (!name || !email || !password ){
     .then(trx.commit)
     .catch(trx.rollback)          
   })
-  .catch(err => res.status(400).json(err, trx))
+  .catch(err => {
+    console.log(err, trx);
+    res.status(400).json('Unable to register 2');
+  })
     //res.json(database.users[database.users.length -1]);
 }
 }
