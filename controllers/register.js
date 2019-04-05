@@ -13,7 +13,6 @@ if (!name || !email || !password ){
 }else{
   const pass = bcrypt.hashSync(password);
   db.transaction(trx => {
-    console.log('reg 1-');
     trx.insert({
       hash: pass,
       email: email
