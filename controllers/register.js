@@ -14,11 +14,10 @@ if (!name || !email || !password ){
   const pass = bcrypt.hashSync(password);
   db.transaction(trx => {
     console.log('reg 1-');
-    trx.insert({
+    trx.insert('login')({
       hash: pass,
       email: email
     })
-    .into('login')
     .returning('id')
     .then(newId => {
       return trx.select('email').from('login').where('id', '=', newId)
