@@ -17,7 +17,6 @@ const db = knex({
     }
 });
 
-db.connect();
 
 
 
