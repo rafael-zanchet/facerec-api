@@ -20,8 +20,7 @@ if (!name || !email || !password ){
       email: email
     })
     .then(newId => {
-      console.log('reg 2');
-      return trx.select('email').from('login').where('id', '=', newId[0].id)
+      return trx.select('email').from('login').where('id', '=', newId[0])
         .then(loginEmail => {
           return trx('users')
           .insert({
@@ -30,7 +29,7 @@ if (!name || !email || !password ){
             joined: new Date()
           })
           .then(newUser => {
-            return trx.select('*').from('users').where('email', 'like', loginEmail[0].email)
+            return trx.select('*').from('users').where('email', 'like', loginEmail[0])
               .then(user => {
                 console.log('reg 3');
                 res.status(200).json(user[0]);
