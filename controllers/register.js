@@ -20,9 +20,9 @@ if (!name || !email || !password ){
       email: email
     })
     .then(newId => {
-      return trx.select('email').from('login').where('id', '=', newId)
+      console.log('reg 2');
+      return trx.select('email').from('login').where('id', '=', newId[0].id)
         .then(loginEmail => {
-          console.log('reg 2');
           return trx('users')
           .insert({
             name: name, 
